@@ -1,0 +1,18 @@
+<div>
+  <input type="text" placeholder="Enter Your Appontment" [(ngModel)]="text">
+  <input type="date" [(ngModel)]="date">
+  <input type="time" [(ngModel)]="time">
+  <button (click)="addApontmant()">Add Appontment</button>
+</div>
+
+<div>
+  <ul>
+    <li *ngFor="let appo of appointments; index as i">
+      {{appo.id}}
+      {{appo.text}}
+      {{appo.date | date }}
+      {{appo.time}}
+    </li>
+  </ul>
+</div>
+
