@@ -1,5 +1,5 @@
 import { CommonModule, Time } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Appointments } from '../../interfaces/appointments';
 
@@ -10,7 +10,7 @@ import { Appointments } from '../../interfaces/appointments';
   templateUrl: './appointments.component.html',
   styleUrl: './appointments.component.scss',
 })
-export class AppointmentsComponent {
+export class AppointmentsComponent implements OnInit {
   text: string = '';
   date!: Date;
   time: string | null = '00:00';
@@ -19,7 +19,12 @@ export class AppointmentsComponent {
 
   constructor() {}
 
-  addApontmant() {
+  ngOnInit(): void {
+    console.log('refresh');
+    let savedAppo = localStorage.getItem('appo');
+    this.appointments = savedAppo ? JSON.parse(savedAppo) : [];
+  }
+  addAppo() {
     if (this.text.trim().length && this.date && this.time) {
       let newAppointment: Appointments = {
         id: this.appointments.length + 1,
@@ -34,7 +39,12 @@ export class AppointmentsComponent {
       this.date = new Date();
       this.time = '';
 
-      console.log(this.appointments);
+      localStorage.setItem('appo', JSON.stringify(this.appointments));
     }
+  }
+
+  removeAppo(index: number) {
+    this.appointments.splice(index, 1);
+    localStorage.setItem('appo', JSON.stringify(this.appointments));
   }
 }

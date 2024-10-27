@@ -2,7 +2,7 @@
   <input type="text" placeholder="Enter Your Appontment" [(ngModel)]="text">
   <input type="date" [(ngModel)]="date">
   <input type="time" [(ngModel)]="time">
-  <button (click)="addApontmant()">Add Appontment</button>
+  <button [disabled]="!text.trim().length" (click)="addAppo()">Add Appontment</button>
 </div>
 
 <div>
@@ -10,8 +10,9 @@
     <li *ngFor="let appo of appointments; index as i">
       {{appo.id}}
       {{appo.text}}
-      {{appo.date | date }}
+      {{ appo.date | date: 'dd-MM-yyyy' }}
       {{appo.time}}
+      <button (click)="removeAppo(i)">Delete</button>
     </li>
   </ul>
 </div>
