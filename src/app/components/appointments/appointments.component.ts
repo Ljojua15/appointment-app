@@ -45,6 +45,9 @@ export class AppointmentsComponent implements OnInit {
 
   removeAppo(index: number) {
     this.appointments.splice(index, 1);
+    this.appointments.forEach((appointment, idx) => {
+      appointment.id = idx + 1;
+    });
     localStorage.setItem('appo', JSON.stringify(this.appointments));
   }
 }
