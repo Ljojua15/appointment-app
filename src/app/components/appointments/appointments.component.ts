@@ -20,7 +20,6 @@ export class AppointmentsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('refresh');
     let savedAppo = localStorage.getItem('appo');
     this.appointments = savedAppo ? JSON.parse(savedAppo) : [];
   }
@@ -46,8 +45,6 @@ export class AppointmentsComponent implements OnInit {
   removeAppo(index: number) {
     this.appointments.splice(index, 1);
     this.appointments.forEach((appointment, idx) => {
-      console.log(appointment, idx);
-
       appointment.id = idx + 1;
     });
     localStorage.setItem('appo', JSON.stringify(this.appointments));
